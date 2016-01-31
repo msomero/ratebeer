@@ -1,0 +1,269 @@
+
+Loading development environment (Rails 4.2.4)
+irb(main):001:0> b = Beer.first
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" ASC LIMIT 1
+=> #<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">
+irb(main):002:0> b.ratings.create score:10
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 1], ["created_at", "2016-01-31 18:46:17.751460"], ["updated_at", "2016-01-31 18:46:17.751460"]]
+   (8.9ms)  commit transaction
+=> #<Rating id: 1, score: 10, beer_id: 1, created_at: "2016-01-31 18:46:17", updated_at: "2016-01-31 18:46:17">
+irb(main):003:0>
+irb(main):004:0* exit
+wadror@wadror:~/ror/ratebeer$ rails c
+Loading development environment (Rails 4.2.4)
+irb(main):001:0>  b = Beer.first
+  Beer Load (0.2ms)  SELECT  "beers".* FROM "beers"  ORDER BY "beers"."id" ASC LIMIT 1
+=> #<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">
+irb(main):002:0> b.ratings.create score:10
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 10], ["beer_id", 1], ["created_at", "2016-01-31 18:46:57.620513"], ["updated_at", "2016-01-31 18:46:57.620513"]]
+   (10.0ms)  commit transaction
+=> #<Rating id: 2, score: 10, beer_id: 1, created_at: "2016-01-31 18:46:57", updated_at: "2016-01-31 18:46:57">
+irb(main):003:0> b.ratings.create score:21
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 21], ["beer_id", 1], ["created_at", "2016-01-31 18:47:06.663015"], ["updated_at", "2016-01-31 18:47:06.663015"]]
+   (10.3ms)  commit transaction
+=> #<Rating id: 3, score: 21, beer_id: 1, created_at: "2016-01-31 18:47:06", updated_at: "2016-01-31 18:47:06">
+irb(main):004:0> b.ratings.create score:17
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 17], ["beer_id", 1], ["created_at", "2016-01-31 18:47:13.821580"], ["updated_at", "2016-01-31 18:47:13.821580"]]
+   (7.5ms)  commit transaction
+=> #<Rating id: 4, score: 17, beer_id: 1, created_at: "2016-01-31 18:47:13", updated_at: "2016-01-31 18:47:13">
+irb(main):005:0> b.ratings << Rating.create(score:15)
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("score", "created_at", "updated_at") VALUES (?, ?, ?)  [["score", 15], ["created_at", "2016-01-31 18:47:52.541435"], ["updated_at", "2016-01-31 18:47:52.541435"]]
+   (7.4ms)  commit transaction
+   (0.3ms)  begin transaction
+  SQL (0.3ms)  UPDATE "ratings" SET "beer_id" = ?, "updated_at" = ? WHERE "ratings"."id" = ?  [["beer_id", 1], ["updated_at", "2016-01-31 18:47:52.552075"], ["id", 5]]
+   (8.1ms)  commit transaction
+  Rating Load (0.2ms)  SELECT "ratings".* FROM "ratings" WHERE "ratings"."beer_id" = ?  [["beer_id", 1]]
+=> #<ActiveRecord::Associations::CollectionProxy [#<Rating id: 1, score: 10, beer_id: 1, created_at: "2016-01-31 18:46:17", updated_at: "2016-01-31 18:46:17">, #<Rating id: 2, score: 10, beer_id: 1, created_at: "2016-01-31 18:46:57", updated_at: "2016-01-31 18:46:57">, #<Rating id: 3, score: 21, beer_id: 1, created_at: "2016-01-31 18:47:06", updated_at: "2016-01-31 18:47:06">, #<Rating id: 4, score: 17, beer_id: 1, created_at: "2016-01-31 18:47:13", updated_at: "2016-01-31 18:47:13">, #<Rating id: 5, score: 15, beer_id: 1, created_at: "2016-01-31 18:47:52", updated_at: "2016-01-31 18:47:52">]>
+irb(main):006:0> Brewery.create name:"BrewDog" year:2007
+SyntaxError: (irb):6: syntax error, unexpected tIDENTIFIER, expecting end-of-input
+Brewery.create name:"BrewDog" year:2007
+                                  ^
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'
+irb(main):007:0> Brewery.find_by name:"BrewDog"
+  Brewery Load (0.2ms)  SELECT  "breweries".* FROM "breweries" WHERE "breweries"."name" = ? LIMIT 1  [["name", "BrewDog"]]
+=> nil
+irb(main):008:0> panimo = _
+=> nil
+irb(main):009:0> p = Brewery.find_by name:"BrewDog"
+  Brewery Load (0.1ms)  SELECT  "breweries".* FROM "breweries" WHERE "breweries"."name" = ? LIMIT 1  [["name", "BrewDog"]]
+=> nil
+irb(main):010:0> Brewery.new :name => "BrewDog" :year => 2007
+SyntaxError: (irb):10: syntax error, unexpected ':', expecting end-of-input
+Brewery.new :name => "BrewDog" :year => 2007
+                                ^
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'
+irb(main):011:0> Brewery.create name:"BrewDog", year:2007
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "breweries" ("name", "year", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "BrewDog"], ["year", 2007], ["created_at", "2016-01-31 18:58:23.806525"], ["updated_at", "2016-01-31 18:58:23.806525"]]
+   (7.2ms)  commit transaction
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):012:0> Brewery.find_by name:"BrewDog"
+  Brewery Load (0.2ms)  SELECT  "breweries".* FROM "breweries" WHERE "breweries"."name" = ? LIMIT 1  [["name", "BrewDog"]]
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):013:0> p = _
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):014:0> Beer.create name:"Punk IPA", style:"lowalcohol"
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "beers" ("name", "style", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "lowalcohol"], ["created_at", "2016-01-31 19:00:13.779498"], ["updated_at", "2016-01-31 19:00:13.779498"]]
+   (7.4ms)  commit transaction
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):015:0> beer1= _
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):016:0> beer1.ratings.create score:25
+   (0.1ms)  begin transaction
+  SQL (0.5ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 25], ["beer_id", 8], ["created_at", "2016-01-31 19:00:58.458130"], ["updated_at", "2016-01-31 19:00:58.458130"]]
+   (7.8ms)  commit transaction
+=> #<Rating id: 6, score: 25, beer_id: 8, created_at: "2016-01-31 19:00:58", updated_at: "2016-01-31 19:00:58">
+irb(main):017:0> beer1.ratings.create score:22
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 22], ["beer_id", 8], ["created_at", "2016-01-31 19:01:27.319383"], ["updated_at", "2016-01-31 19:01:27.319383"]]
+   (11.7ms)  commit transaction
+=> #<Rating id: 7, score: 22, beer_id: 8, created_at: "2016-01-31 19:01:27", updated_at: "2016-01-31 19:01:27">
+irb(main):018:0> Brewery.find_by brewery_id=8
+  Brewery Load (0.3ms)  SELECT  "breweries".* FROM "breweries" WHERE (8) LIMIT 1
+=> #<Brewery id: 1, name: "Koff", year: 1897, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">
+irb(main):019:0> Brewery.find_by brewery_id:8
+  Brewery Load (0.5ms)  SELECT  "breweries".* FROM "breweries" WHERE "breweries"."brewery_id" = 8 LIMIT 1
+SQLite3::SQLException: no such column: breweries.brewery_id: SELECT  "breweries".* FROM "breweries" WHERE "breweries"."brewery_id" = 8 LIMIT 1
+ActiveRecord::StatementInvalid: SQLite3::SQLException: no such column: breweries.brewery_id: SELECT  "breweries".* FROM "breweries" WHERE "breweries"."brewery_id" = 8 LIMIT 1
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/sqlite3-1.3.11/lib/sqlite3/database.rb:91:in `initialize'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/sqlite3-1.3.11/lib/sqlite3/database.rb:91:in `new'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/sqlite3-1.3.11/lib/sqlite3/database.rb:91:in `prepare'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/sqlite3_adapter.rb:296:in `block in exec_query'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract_adapter.rb:473:in `block in log'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activesupport-4.2.4/lib/active_support/notifications/instrumenter.rb:20:in `instrument'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract_adapter.rb:467:in `log'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/sqlite3_adapter.rb:293:in `exec_query'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/database_statements.rb:351:in `select'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/database_statements.rb:32:in `select_all'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/query_cache.rb:70:in `select_all'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/querying.rb:39:in `find_by_sql'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation.rb:639:in `exec_queries'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation.rb:515:in `load'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation.rb:243:in `to_a'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation/finder_methods.rb:475:in `find_take'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation/finder_methods.rb:105:in `take'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/relation/finder_methods.rb:84:in `find_by'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/querying.rb:7:in `find_by'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/core.rb:173:in `find_by'
+        from (irb):19
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'irb(main):020:0> Brewery.last
+  Brewery Load (0.4ms)  SELECT  "breweries".* FROM "breweries"  ORDER BY "breweries"."id" DESC LIMIT 1
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):021:0> p = _
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):022:0> Beer.find_by name:"Punk IPA"
+  Beer Load (0.3ms)  SELECT  "beers".* FROM "beers" WHERE "beers"."name" = ? LIMIT 1  [["name", "Punk IPA"]]
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):023:0> b1 = _
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):024:0> p.beers.create b1
+   (0.1ms)  begin transaction
+   (0.1ms)  rollback transaction
+ArgumentError: When assigning attributes, you must pass a hash as an argument.
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/attribute_assignment.rb:25:in `assign_attributes'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/core.rb:564:in `init_attributes'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/core.rb:281:in `initialize'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/inheritance.rb:61:in `new'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/inheritance.rb:61:in `new'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/reflection.rb:131:in `build_association'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/association.rb:250:in `build_record'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_association.rb:493:in `block in _create_record'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_association.rb:183:in `block in transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/database_statements.rb:213:in `block in transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/transaction.rb:184:in `within_new_transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/connection_adapters/abstract/database_statements.rb:213:in `transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/transactions.rb:220:in `transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_association.rb:182:in `transaction'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_association.rb:492:in `_create_record'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/has_many_association.rb:187:in `_create_record'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_association.rb:153:in `create'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activerecord-4.2.4/lib/active_record/associations/collection_proxy.rb:290:in `create'
+        from (irb):24
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'irb(main):025:0> Beer
+=> Beer(id: integer, name: string, style: string, brewery_id: integer, created_at: datetime, updated_at: datetime)
+irb(main):026:0> Beer.all
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers"
+=> #<ActiveRecord::Relation [#<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 3, name: "Tuplahumala", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 4, name: "Huvila Pale Ale", style: "Pale Ale", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 5, name: "X Porter", style: "Porter", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 6, name: "Hefeweizen", style: "Weizen", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 7, name: "Helles", style: "Lager", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">]>
+irb(main):027:0> b1
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):028:0> b1.delete
+  SQL (12.5ms)  DELETE FROM "beers" WHERE "beers"."id" = ?  [["id", 8]]
+=> #<Beer id: 8, name: "Punk IPA", style: "lowalcohol", brewery_id: nil, created_at: "2016-01-31 19:00:13", updated_at: "2016-01-31 19:00:13">
+irb(main):029:0> Beer.all
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers"
+=> #<ActiveRecord::Relation [#<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 3, name: "Tuplahumala", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 4, name: "Huvila Pale Ale", style: "Pale Ale", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 5, name: "X Porter", style: "Porter", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 6, name: "Hefeweizen", style: "Weizen", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 7, name: "Helles", style: "Lager", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">]>
+irb(main):030:0> p
+=> #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">
+irb(main):031:0> Beer.create name:"Punk IPA", style:"IPA" brewery_id:p.id
+SyntaxError: (irb):31: syntax error, unexpected tIDENTIFIER, expecting end-of-input
+Beer.create name:"Punk IPA", style:"IPA" brewery_id:p.id
+                                                   ^
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'
+irb(main):032:0> ^C
+irb(main):032:0> Beer.create name:"Punk IPA", style:"IPA", brewery_id:p.id
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Punk IPA"], ["style", "IPA"], ["brewery_id", 4], ["created_at", "2016-01-31 19:10:54.331226"], ["updated_at", "2016-01-31 19:10:54.331226"]]
+   (13.7ms)  commit transaction
+=> #<Beer id: 9, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2016-01-31 19:10:54", updated_at: "2016-01-31 19:10:54">
+irb(main):033:0> Brewery.all
+  Brewery Load (0.2ms)  SELECT "breweries".* FROM "breweries"
+=> #<ActiveRecord::Relation [#<Brewery id: 1, name: "Koff", year: 1897, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Brewery id: 2, name: "Malmgard", year: 2001, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Brewery id: 3, name: "Weihenstephaner", year: 1042, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Brewery id: 4, name: "BrewDog", year: 2007, created_at: "2016-01-31 18:58:23", updated_at: "2016-01-31 18:58:23">]>
+irb(main):034:0> Beer.create name:"Nanny State", style:"lowalcohol, brewery_id:p.id
+irb(main):035:0" Beer.all
+irb(main):036:0" exit
+irb(main):037:0" ^C
+irb(main):037:0> Beer.all
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers"
+=> #<ActiveRecord::Relation [#<Beer id: 1, name: "Iso 3", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 2, name: "Karhu", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 3, name: "Tuplahumala", style: "Lager", brewery_id: 1, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 4, name: "Huvila Pale Ale", style: "Pale Ale", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 5, name: "X Porter", style: "Porter", brewery_id: 2, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 6, name: "Hefeweizen", style: "Weizen", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 7, name: "Helles", style: "Lager", brewery_id: 3, created_at: "2016-01-31 17:27:59", updated_at: "2016-01-31 17:27:59">, #<Beer id: 9, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2016-01-31 19:10:54", updated_at: "2016-01-31 19:10:54">]>
+irb(main):038:0>  Beer.create name:"Nanny State", style:"lowalcohol, brewery_id:p.id
+irb(main):039:0" ^C
+irb(main):039:0>  Beer.create name:"Nanny State", style:"lowalcohol, brewery_id:p.id
+irb(main):040:0" ^C
+irb(main):040:0> Beer.create name:"Nanny State", style:"lowalcohol", brewery_id:p.id
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "beers" ("name", "style", "brewery_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["name", "Nanny State"], ["style", "lowalcohol"], ["brewery_id", 4], ["created_at", "2016-01-31 19:13:56.202146"], ["updated_at", "2016-01-31 19:13:56.202146"]]
+   (10.0ms)  commit transaction
+=> #<Beer id: 10, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2016-01-31 19:13:56", updated_at: "2016-01-31 19:13:56">
+irb(main):041:0> ^C
+irb(main):041:0> exit
+Loading development environment (Rails 4.2.4)
+irb(main):001:0> Beer.where brewery_id: 4
+  Beer Load (0.3ms)  SELECT "beers".* FROM "beers" WHERE "beers"."brewery_id" = ?  [["brewery_id", 4]]
+=> #<ActiveRecord::Relation [#<Beer id: 9, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2016-01-31 19:10:54", updated_at: "2016-01-31 19:10:54">, #<Beer id: 10, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2016-01-31 19:13:56", updated_at: "2016-01-31 19:13:56">]>
+irb(main):002:0> bs = _
+=> #<ActiveRecord::Relation [#<Beer id: 9, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2016-01-31 19:10:54", updated_at: "2016-01-31 19:10:54">, #<Beer id: 10, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2016-01-31 19:13:56", updated_at: "2016-01-31 19:13:56">]>
+irb(main):003:0> b1 = bs.first
+=> #<Beer id: 9, name: "Punk IPA", style: "IPA", brewery_id: 4, created_at: "2016-01-31 19:10:54", updated_at: "2016-01-31 19:10:54">
+irb(main):004:0> b1.raitings.create score:20
+NoMethodError: undefined method `raitings' for #<Beer:0x007fbc2dbc41e8>
+Did you mean?  ratings
+               ratings=
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/activemodel-4.2.4/lib/active_model/attribute_methods.rb:433:in `method_missing'
+        from (irb):4
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:110:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/console.rb:9:in `start'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:68:in `console'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands/commands_tasks.rb:39:in `run_command!'
+        from /home/wadror/.rbenv/versions/2.3.0/lib/ruby/gems/2.3.0/gems/railties-4.2.4/lib/rails/commands.rb:17:in `<top (required)>'
+        from bin/rails:4:in `require'
+        from bin/rails:4:in `<main>'
+irb(main):005:0> b1.ratings.create score:20
+   (0.1ms)  begin transaction
+  SQL (0.4ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 20], ["beer_id", 9], ["created_at", "2016-01-31 20:06:49.325175"], ["updated_at", "2016-01-31 20:06:49.325175"]]
+   (15.6ms)  commit transaction
+=> #<Rating id: 8, score: 20, beer_id: 9, created_at: "2016-01-31 20:06:49", updated_at: "2016-01-31 20:06:49">
+irb(main):006:0> b1.ratings.create score:23
+   (0.1ms)  begin transaction
+  SQL (0.3ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 23], ["beer_id", 9], ["created_at", "2016-01-31 20:07:18.765542"], ["updated_at", "2016-01-31 20:07:18.765542"]]
+   (7.6ms)  commit transaction
+=> #<Rating id: 9, score: 23, beer_id: 9, created_at: "2016-01-31 20:07:18", updated_at: "2016-01-31 20:07:18">
+irb(main):007:0> b2 = bs.last
+=> #<Beer id: 10, name: "Nanny State", style: "lowalcohol", brewery_id: 4, created_at: "2016-01-31 19:13:56", updated_at: "2016-01-31 19:13:56">
+irb(main):008:0> b2.ratings.create score:19
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 19], ["beer_id", 10], ["created_at", "2016-01-31 20:08:27.651941"], ["updated_at", "2016-01-31 20:08:27.651941"]]
+   (14.2ms)  commit transaction
+=> #<Rating id: 10, score: 19, beer_id: 10, created_at: "2016-01-31 20:08:27", updated_at: "2016-01-31 20:08:27">
+irb(main):009:0> b2.ratings.create score:21
+   (0.1ms)  begin transaction
+  SQL (0.2ms)  INSERT INTO "ratings" ("score", "beer_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["score", 21], ["beer_id", 10], ["created_at", "2016-01-31 20:08:52.442068"], ["updated_at", "2016-01-31 20:08:52.442068"]]
+   (11.2ms)  commit transaction
+=> #<Rating id: 11, score: 21, beer_id: 10, created_at: "2016-01-31 20:08:52", updated_at: "2016-01-31 20:08:52">
+irb(main):010:0>
+
