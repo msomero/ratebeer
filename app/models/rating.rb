@@ -6,5 +6,9 @@ class Rating < ActiveRecord::Base
     "#{name} #{score}"
   end
 
+  def create
+    byebug
+    raise
+  end
 
 end
