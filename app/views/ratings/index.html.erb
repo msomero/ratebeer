@@ -3,17 +3,10 @@
 <h1> List of ratings </h1>
 
 <p> Number of ratings: <%= @ratings.count %> </p>
-
-<ul>
- <% @ratings.each do |rating| %>
-   <li> <%= rating.to_s %> </li>
- <% end %>
-</ul>
-
 <ul>
   <% @ratings.each do |rating| %>
-    <li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete %> </li>
+    <li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete, data: { confirm: 'Are you sure?' } %> </li>
   <% end %>
 </ul>
 
-<p> <%= link_to 'New Rating' ,  new_rating_path %>
+<p> <%= link_to 'New Rating' ,  new_rating_path, method: :new %> </p>
