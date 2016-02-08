@@ -10,4 +10,10 @@
  <% end %>
 </ul>
 
-<p> <%= link_to 'New Rating' ,  ratings_new_path %>
+<ul>
+  <% @ratings.each do |rating| %>
+    <li> <%= rating %> <%= link_to 'delete', rating_path(rating.id), method: :delete %> </li>
+  <% end %>
+</ul>
+
+<p> <%= link_to 'New Rating' ,  new_rating_path %>

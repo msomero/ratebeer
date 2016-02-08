@@ -4,14 +4,17 @@ Rails.application.routes.draw do
 
 root 'breweries#index'
 
-get 'ratings', to: 'ratings#index'
+#get 'ratings', to: 'ratings#index'
 
-get 'ratings/new', to: 'ratings#new'
+#get 'ratings/new', to: 'ratings#new'
 
-post 'ratings', to: 'ratings#create'
+#post 'ratings', to: 'ratings#create'
 
-get 'kaikki_bisset', to: 'beers#index'
-  # The priority is based upon order of creation: first created -> highest priority.
+#get 'kaikki_bisset', to: 'beers#index'
+
+ resources :ratings, only: [:index, :new, :create, :destroy] 
+
+ # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
